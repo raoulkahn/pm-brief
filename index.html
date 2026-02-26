@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM Brief — AI Product Case Study</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --bg: #111111;
+            --surface: #1a1a1a;
+            --surface-2: #222222;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --text-muted: #888888;
+            --accent: #e85d4a;
+            --accent-dim: rgba(232, 93, 74, 0.15);
+            --blue: #3b82f6;
+            --green: #22c55e;
+            --amber: #f59e0b;
+            --red: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* === HEADER === */
+        header {
+            padding: 60px 0 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .label {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .byline {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .byline a {
+            color: var(--text-muted);
+            text-decoration: underline;
+            text-decoration-color: #444;
+            text-underline-offset: 3px;
+        }
+
+        .byline a:hover {
+            color: var(--text);
+        }
+
+        /* === HERO IMAGE === */
+        .hero-image {
+            margin: 48px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .hero-image img {
+            width: 100%;
+            display: block;
+        }
+
+        .hero-caption {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+            font-style: italic;
+            margin-top: 12px;
+        }
+
+        /* === SECTIONS === */
+        section {
+            padding: 56px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.3px;
+        }
+
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            margin-top: 32px;
+        }
+
+        p {
+            margin-bottom: 16px;
+        }
+
+        .bold-callout {
+            font-weight: 700;
+        }
+
+        /* === ARCHITECTURE CARDS === */
+        .arch-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .arch-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .arch-card .card-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .arch-card h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .arch-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        .arch-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* === DEMO VIDEO === */
+        .demo-section {
+            text-align: center;
+            padding: 48px 0;
+        }
+
+        .demo-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .video-container {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: #000;
+            margin: 20px 0;
+        }
+
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+
+        .video-caption {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 12px;
+        }
+
+        /* === HOW IT WORKS === */
+        .steps {
+            margin: 32px 0;
+        }
+
+        .step {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 12px;
+        }
+
+        .step-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .step h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        /* === AGENT SCREENSHOTS === */
+        .agent-screenshots {
+            margin: 40px 0;
+        }
+
+        .screenshot-block {
+            margin-bottom: 48px;
+        }
+
+        .screenshot-block h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            margin-top: 0;
+        }
+
+        .screenshot-img {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .screenshot-img:hover {
+            transform: scale(1.01);
+        }
+
+        .screenshot-img img {
+            width: 100%;
+            display: block;
+        }
+
+        /* === LIGHTBOX === */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.92);
+            z-index: 1000;
+            cursor: zoom-out;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 95%;
+            max-height: 95vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #888;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .lightbox-close:hover {
+            color: #fff;
+        }
+
+        /* === INSIGHTS === */
+        .insight {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 12px;
+        }
+
+        .insight .step-number {
+            color: var(--accent);
+        }
+
+        .insight h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .insight p {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        /* === PULLQUOTE === */
+        .pullquote {
+            border-left: 3px solid var(--accent);
+            padding: 24px 0 24px 24px;
+            margin: 40px 0;
+            font-size: 20px;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .pullquote .attribution {
+            font-style: normal;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 12px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* === LIMITATIONS === */
+        .limitation {
+            margin-bottom: 28px;
+        }
+
+        .limitation h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .limitation p {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* === TECH DETAILS === */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 32px 0;
+        }
+
+        .tech-cell {
+            background: var(--surface);
+            padding: 20px;
+        }
+
+        .tech-cell .cell-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .tech-cell .cell-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* === TAGS === */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 32px 0;
+        }
+
+        .tag {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            color: var(--text-muted);
+        }
+
+        /* === FOOTER === */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        footer a:hover {
+            color: var(--text);
+        }
+
+        /* === NARRATED FEATURES === */
+        .vision-list {
+            margin: 24px 0;
+        }
+
+        .vision-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .vision-item:last-child {
+            border-bottom: none;
+        }
+
+        .vision-bullet {
+            width: 6px;
+            height: 6px;
+            min-width: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin-top: 10px;
+        }
+
+        .vision-item span {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 640px) {
+            h1 { font-size: 30px; }
+            h2 { font-size: 26px; }
+            .arch-grid { grid-template-columns: 1fr; }
+            .tech-grid { grid-template-columns: 1fr 1fr; }
+            body { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header>
+        <div class="label">AI Product Case Study · Raoul Kahn</div>
+        <h1>PM Brief</h1>
+        <div class="subtitle">A multi-agent AI system that autonomously triages a PM's email, calendar, support tickets, and competitive landscape — then synthesizes everything into a single prioritized briefing.</div>
+        <div class="byline"><strong>Raoul Kahn</strong> · <a href="https://raoulkahn.com/portfolio">raoulkahn.com/portfolio</a></div>
+    </header>
+
+    <!-- HERO IMAGE -->
+    <div class="hero-image">
+        <img src="images/n8n-hero.png" alt="PM Brief n8n workflow — Synthesizer AI Agent connected to Email, Calendar, Jira, and Competitive Intel agent tools">
+    </div>
+    <div class="hero-caption">The complete n8n workflow after a successful execution — Synthesizer calling 4 worker agents</div>
+
+    <!-- THE PROBLEM -->
+    <section>
+        <h2>The Problem</h2>
+        <p>Product managers start every day the same way — opening 8-10 tools to figure out what happened overnight. Email, calendar, Jira, Slack, competitive blogs, analytics dashboards. The data exists across all of them, but the triage is manual, repetitive, and fragmented.</p>
+        <p><span class="bold-callout">What if AI agents could do the overnight triage autonomously — scanning every source, filtering signal from noise, cross-correlating across systems, and delivering a single prioritized briefing by the time the PM opens their laptop?</span></p>
+        <p>Not a dashboard that displays data. An intelligence layer that thinks about it.</p>
+        <p>This project demonstrates how multi-agent orchestration enables autonomous information gathering and synthesis — the same pattern that would power internal decision-support tools at any product-led company.</p>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section>
+        <h2>Architecture</h2>
+        <p>A hierarchical supervisor pattern: one Synthesizer agent (Claude Sonnet) coordinates four specialized worker agents (GPT-4.1 nano), each connected to a different data source. The workers handle high-token ingestion on cheap models; the Synthesizer handles cross-source reasoning on a strong model.</p>
+
+        <div class="arch-grid">
+            <div class="arch-card">
+                <div class="card-label">Email Agent</div>
+                <h4>Gmail via n8n native node</h4>
+                <p>Scans inbox, classifies messages by urgency, filters noise (newsletters, FYIs, cc'd threads), surfaces action items.</p>
+            </div>
+            <div class="arch-card">
+                <div class="card-label">Calendar Agent</div>
+                <h4>Google Calendar via n8n native node</h4>
+                <p>Detects schedule changes, cancelled meetings, and time conflicts. Recommends keep/skip/prep for each event.</p>
+            </div>
+            <div class="arch-card">
+                <div class="card-label">Support Agent</div>
+                <h4>Jira via n8n native node</h4>
+                <p>Monitors ticket queue for escalations, P1 bugs, and status changes. Flags items requiring PM attention.</p>
+            </div>
+            <div class="arch-card">
+                <div class="card-label">Competitive Intel Agent</div>
+                <h4>Tavily web search via HTTP Request</h4>
+                <p>Runs targeted searches for competitor product updates, pricing changes, and announcements.</p>
+            </div>
+            <div class="arch-card full-width">
+                <div class="card-label">Synthesizer Agent</div>
+                <h4>Claude Sonnet via Anthropic API</h4>
+                <p>Receives condensed outputs from all four workers. Cross-references signals, ranks by priority, identifies correlations across sources, and produces a structured briefing with recommended actions.</p>
+            </div>
+        </div>
+
+        <p>The workflow runs on n8n, self-hosted via Docker on a Mac Studio. Sequential execution — each agent runs in order, results flow up to the Synthesizer. No external orchestration framework, no cloud deployment. The entire system runs locally.</p>
+    </section>
+
+    <!-- DEMO VIDEO -->
+    <section class="demo-section">
+        <div class="demo-label">▶ Watch the Demo</div>
+        <div class="video-container">
+            <video controls preload="metadata" poster="images/n8n-hero.png">
+                <source src="n8n-full-workflow.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video-caption">Full n8n workflow execution — 4 agents scanning data sources and reporting to the Synthesizer</div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section>
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">01</div>
+                <h4>Agents Scan Overnight</h4>
+                <p>The workflow triggers and each agent independently connects to its data source — Gmail, Google Calendar, Jira, and Tavily. They ingest raw data using GPT-4.1 nano, classify and filter it, then pass condensed summaries to the Synthesizer.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <h4>Synthesizer Cross-References</h4>
+                <p>Claude Sonnet receives all four agent reports and identifies connections between them — a Jira P1 ticket that matches an escalation email, a calendar meeting that needs prep based on competitive intel. Signals from one source inform the priority of another.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <h4>Prioritized Briefing Generated</h4>
+                <p>The Synthesizer produces structured JSON — ranked priority items with recommended actions, calendar events with keep/skip/prep tags, an overnight changelog, and summary statistics. "3 need action" not "47 emails."</p>
+            </div>
+            <div class="step">
+                <div class="step-number">04</div>
+                <h4>PM Reviews One Screen</h4>
+                <p>The briefing populates a dashboard where the PM can scan everything in under 2 minutes — compared to 60+ minutes manually triaging across 8-10 tools. Each item links back to its source for drill-down.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEFORE / AFTER -->
+    <section>
+        <h2>Before &amp; After</h2>
+        <p>The PM checked in Wednesday at 6:00 PM — nothing new. Overnight, four agents worked autonomously. By Thursday 8:15 AM, the dashboard shows what changed and what needs attention.</p>
+
+        <div class="agent-screenshots">
+            <div class="screenshot-block">
+                <h3>Wednesday 6:00 PM — Last Check-In</h3>
+                <div class="screenshot-img" onclick="openLightbox(this)">
+                    <img src="images/Yesterday.png" alt="PM Brief dashboard - yesterday view showing no new activity">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AGENT DEEP DIVES -->
+    <section>
+        <h2>What Each Agent Found</h2>
+        <p>Each annotated screenshot isolates one agent's contribution — showing how a single detection ripples across the entire dashboard. Numbered markers connect to the summary box. Click any image to enlarge.</p>
+
+        <div class="agent-screenshots">
+            <div class="screenshot-block">
+                <h3>Calendar Agent — 2 Changes Detected</h3>
+                <div class="screenshot-img" onclick="openLightbox(this)">
+                    <img src="images/Calendar.png" alt="Calendar Agent annotated view showing 2 overnight changes traced across 4 dashboard sections">
+                </div>
+            </div>
+
+            <div class="screenshot-block">
+                <h3>Email Agent — 47 Scanned, 4 Surfaced</h3>
+                <div class="screenshot-img" onclick="openLightbox(this)">
+                    <img src="images/Email.png" alt="Email Agent annotated view showing 3 action items and 1 resolved blocker">
+                </div>
+            </div>
+
+            <div class="screenshot-block">
+                <h3>Support Agent — 1 P1 Escalation</h3>
+                <div class="screenshot-img" onclick="openLightbox(this)">
+                    <img src="images/Jira.png" alt="Jira Support Agent annotated view showing P1 escalation cross-correlated with email">
+                </div>
+            </div>
+
+            <div class="screenshot-block">
+                <h3>Competitive Intel Agent — 2 Releases Detected</h3>
+                <div class="screenshot-img" onclick="openLightbox(this)">
+                    <img src="images/Competitive_Intel.png" alt="Competitive Intel modal showing 2 competitor releases with summaries and links">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT THE SYSTEM REVEALED -->
+    <section>
+        <h2>What the System Revealed</h2>
+        <p>Beyond the individual agent reports, the Synthesizer surfaced patterns that would take a PM significant time to piece together manually.</p>
+
+        <div class="steps">
+            <div class="insight">
+                <div class="step-number">01</div>
+                <h4>Cross-source correlation catches what siloed tools miss</h4>
+                <p>The APAC checkout error appeared in both email (from James Liu at 2:14 AM) and Jira (P1 ticket). The Synthesizer confirmed it was the same incident from two independent sources and escalated it to the top of the priority list. No single tool tells that story alone.</p>
+            </div>
+
+            <div class="insight">
+                <div class="step-number">02</div>
+                <h4>Filtering is the real value — not aggregation</h4>
+                <p>The Email Agent scanned 47 messages and surfaced 4. 43 were noise — newsletters, FYIs, cc'd threads. The intelligence isn't in showing everything; it's in knowing what to hide. "3 need action" is more useful than "47 unread."</p>
+            </div>
+
+            <div class="insight">
+                <div class="step-number">03</div>
+                <h4>Context-aware recommendations beat status updates</h4>
+                <p>The system didn't just detect that VP Strategy Sync moved to 3:00 PM — it connected that meeting to the Competitive Intel findings and recommended the PM prep with the competitor pricing data. The calendar change informed the priority list, which informed the meeting prep. One change, traced across four sections.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PULLQUOTE -->
+    <div class="pullquote">
+        This is not a dashboard. This is an autonomous decision-support system. The dashboard is a commodity. The intelligence layer is the product.
+    </div>
+
+    <!-- LIMITATIONS -->
+    <section>
+        <h2>Limitations &amp; Production Considerations</h2>
+
+        <div class="limitation">
+            <h4>Test data, not live production systems</h4>
+            <p>This demo uses seeded test data across Gmail, Google Calendar, and Jira. In production, the agents would connect to the same APIs with real data. The architecture is identical — only the volume and variability of data changes.</p>
+        </div>
+
+        <div class="limitation">
+            <h4>Sequential execution, not parallel</h4>
+            <p>Agents run one after another for easier debugging and deterministic behavior. For a daily batch workflow, sequential is sufficient. Parallel execution would reduce total runtime but adds coordination complexity — a worthwhile optimization for real-time use cases.</p>
+        </div>
+
+        <div class="limitation">
+            <h4>Dashboard is a Figma mockup</h4>
+            <p>The frontend is a design artifact, not a working application. The value proposition is the intelligence layer — the multi-agent orchestration, cross-source reasoning, and structured output. The dashboard is a commodity; building it in React would demonstrate frontend skills, not AI product thinking.</p>
+        </div>
+
+        <div class="limitation">
+            <h4>Known failure modes</h4>
+            <p>The Email Agent may over-prioritize messages with urgent keywords without sufficient context. The Competitive Intel Agent may flag irrelevant posts due to keyword similarity. The Synthesizer may overweight certain sources depending on prompt framing. Mitigations include structured output schemas, confidence scoring, and threshold filtering.</p>
+        </div>
+    </section>
+
+    <!-- VISION -->
+    <section>
+        <h2>Vision — What Comes Next</h2>
+        <p>The current system demonstrates the core pattern with 4 agents. In production, this architecture extends to any data source a PM touches.</p>
+
+        <div class="vision-list">
+            <div class="vision-item"><div class="vision-bullet"></div><span>SMS alerts for critical items above a confidence threshold</span></div>
+            <div class="vision-item"><div class="vision-bullet"></div><span>Autonomous actions — declining optional meetings, sending status updates</span></div>
+            <div class="vision-item"><div class="vision-bullet"></div><span>Slack, Analytics, Feature Requests, Leadership Notes, Social Media agents</span></div>
+            <div class="vision-item"><div class="vision-bullet"></div><span>Confidence threshold + permissions framework for autonomous vs. recommended actions</span></div>
+            <div class="vision-item"><div class="vision-bullet"></div><span>Weekly rollup view with trend detection</span></div>
+            <div class="vision-item"><div class="vision-bullet"></div><span>Carry-forward logic for unchecked items</span></div>
+            <div class="vision-item"><div class="vision-bullet"></div><span>Real-time continuous updates vs. daily batch</span></div>
+        </div>
+    </section>
+
+    <!-- TECH DETAILS -->
+    <section>
+        <h2>Technical Details</h2>
+
+        <div class="tech-grid">
+            <div class="tech-cell">
+                <div class="cell-label">Platform</div>
+                <div class="cell-value">n8n (self-hosted)</div>
+            </div>
+            <div class="tech-cell">
+                <div class="cell-label">Infrastructure</div>
+                <div class="cell-value">Docker on Mac Studio</div>
+            </div>
+            <div class="tech-cell">
+                <div class="cell-label">Pattern</div>
+                <div class="cell-value">Hierarchical Supervisor</div>
+            </div>
+            <div class="tech-cell">
+                <div class="cell-label">Synthesizer</div>
+                <div class="cell-value">Claude Sonnet</div>
+            </div>
+            <div class="tech-cell">
+                <div class="cell-label">Worker Models</div>
+                <div class="cell-value">GPT-4.1 nano (×4)</div>
+            </div>
+            <div class="tech-cell">
+                <div class="cell-label">Execution</div>
+                <div class="cell-value">Sequential</div>
+            </div>
+            <div class="tech-cell">
+                <div class="cell-label">Data Sources</div>
+                <div class="cell-value">Gmail, Calendar, Jira, Tavily</div>
+            </div>
+            <div class="tech-cell">
+                <div class="cell-label">Agents</div>
+                <div class="cell-value">4 workers + 1 synthesizer</div>
+            </div>
+            <div class="tech-cell">
+                <div class="cell-label">Output</div>
+                <div class="cell-value">Structured JSON</div>
+            </div>
+        </div>
+
+        <div class="tags">
+            <span class="tag">multi-agent systems</span>
+            <span class="tag">n8n</span>
+            <span class="tag">AI orchestration</span>
+            <span class="tag">Claude Sonnet</span>
+            <span class="tag">GPT-4.1 nano</span>
+            <span class="tag">product management</span>
+            <span class="tag">information triage</span>
+            <span class="tag">competitive intelligence</span>
+            <span class="tag">Docker</span>
+            <span class="tag">autonomous agents</span>
+            <span class="tag">structured reasoning</span>
+        </div>
+    </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        Built by <a href="https://raoulkahn.com/portfolio">Raoul Kahn</a> · <a href="https://github.com/raoulkahn/pm-brief">View on GitHub</a>
+    </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close">ESC to close</button>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(el) {
+    const img = el.querySelector('img');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+});
+</script>
+
+</body>
+</html>

@@ -271,17 +271,20 @@
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border);
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .screenshot-img:hover {
-            transform: scale(1.01);
+            cursor: zoom-in;
         }
 
         .screenshot-img img {
             width: 100%;
             display: block;
+        }
+
+        .click-hint {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
         }
 
         /* === LIGHTBOX === */
@@ -518,8 +521,11 @@
     </header>
 
     <!-- HERO IMAGE -->
+    <p class="click-hint" style="margin-top: 48px;">🔍 Click image to zoom in</p>
     <div class="hero-image">
-        <img src="images/n8n-hero.png" alt="PM Brief n8n workflow — Synthesizer AI Agent connected to Email, Calendar, Jira, and Competitive Intel agent tools">
+        <div class="screenshot-img" onclick="openLightbox(this)">
+            <img src="images/n8n-hero.png" alt="PM Brief n8n workflow — Synthesizer AI Agent connected to Email, Calendar, Jira, and Competitive Intel agent tools">
+        </div>
     </div>
     <div class="hero-caption">The complete n8n workflow after a successful execution — Synthesizer calling 4 worker agents</div>
 
@@ -610,7 +616,8 @@
     <!-- BEFORE / AFTER -->
     <section>
         <h2>Before &amp; After</h2>
-        <p>The PM checked in Wednesday at 6:00 PM — nothing new. Overnight, four agents worked autonomously. By Thursday 8:15 AM, the dashboard shows what changed and what needs attention.</p>
+        <p>To demonstrate the impact of the multi-agent system, we designed a custom PM dashboard in Figma that visualizes exactly what the agents produce. The PM checked in Wednesday at 6:00 PM — nothing new. Overnight, four agents worked autonomously. By Thursday 8:15 AM, the dashboard shows what changed and what needs attention.</p>
+        <p class="click-hint">🔍 Click image to zoom in</p>
 
         <div class="agent-screenshots">
             <div class="screenshot-block">
@@ -625,7 +632,8 @@
     <!-- AGENT DEEP DIVES -->
     <section>
         <h2>What Each Agent Found</h2>
-        <p>Each annotated screenshot isolates one agent's contribution — showing how a single detection ripples across the entire dashboard. Numbered markers connect to the summary box. Click any image to enlarge.</p>
+        <p>Each annotated screenshot isolates one agent's contribution — showing how a single detection ripples across the entire dashboard. Numbered markers connect to the summary box.</p>
+        <p class="click-hint">🔍 Click any image to zoom in</p>
 
         <div class="agent-screenshots">
             <div class="screenshot-block">
